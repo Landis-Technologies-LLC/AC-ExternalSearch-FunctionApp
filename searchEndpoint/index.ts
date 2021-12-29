@@ -2,7 +2,7 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import data from "./db"
 
 const httpTrigger: AzureFunction = async function ( context: Context, req: HttpRequest ): Promise<void> {
-    context.log( 'HTTP trigger function processed a request.' + req );
+    context.log( 'HTTP trigger function processed a request. Search Term was ' + req.body.Search );
     const responseMessage = data
     const responseMessageNew = filterSearch( req.body.Search )
 
@@ -13,7 +13,7 @@ const httpTrigger: AzureFunction = async function ( context: Context, req: HttpR
 
 };
 
-function filterSearch( searchTerm ) {
+function filterSearch( searchTerm: string ) {
     return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) )
 };
 
