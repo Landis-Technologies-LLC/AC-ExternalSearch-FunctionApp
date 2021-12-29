@@ -1,6 +1,9 @@
 //Fake Datastore for testing/POC
 
-const data = [
+/* -- Old Sample Data Array --
+
+const data = 
+[
     {
         "id": null,
         "givenName": "Armando",
@@ -342,5 +345,4 @@ const data = [
         "country": null
     }
 ]
-
-export default data;
+*/
