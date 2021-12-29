@@ -2,14 +2,19 @@ import { AzureFunction, Context, HttpRequest } from "@azure/functions"
 import data from "./db"
 
 const httpTrigger: AzureFunction = async function ( context: Context, req: HttpRequest ): Promise<void> {
-    context.log( 'HTTP trigger function processed a request.' );
+    context.log( 'HTTP trigger function processed a request.' + req );
     const responseMessage = data
+    const responseMessageNew = filterSearch( req.body.Search )
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        body: responseMessage
+        body: responseMessageNew
     };
 
+};
+
+function filterSearch( searchTerm ) {
+    return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) )
 };
 
 export default httpTrigger;
