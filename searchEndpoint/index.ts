@@ -3,7 +3,6 @@ import * as data from './contactlist.sample.json';
 
 const httpTrigger: AzureFunction = async function ( context: Context, req: HttpRequest ): Promise<void> {
     context.log( 'HTTP trigger function processed a request. Search Term was ' + req.body.searchTerm );
-    const responseMessage = data
     const responseMessageNew = filterSearch( req.body.searchTerm )
 
     context.res = {
