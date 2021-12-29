@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import data from "./db"
+import * as data from './contactlist.sample.json';
 
 const httpTrigger: AzureFunction = async function ( context: Context, req: HttpRequest ): Promise<void> {
     context.log( 'HTTP trigger function processed a request. Search Term was ' + req.body.searchTerm );
@@ -14,6 +14,7 @@ const httpTrigger: AzureFunction = async function ( context: Context, req: HttpR
 };
 
 function filterSearch( searchTerm: string ) {
+    // @ts-ignore
     return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) )
 };
 
