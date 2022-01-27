@@ -14,7 +14,7 @@ const httpTrigger: AzureFunction = async function ( context: Context, req: HttpR
 
 function filterSearch( searchTerm: string ) {
     // @ts-ignore
-    return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) )
+    return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) || item.userPrincipalName.toLowerCase().includes( searchTerm.toLowerCase() ) );
 };
 
 export default httpTrigger;
