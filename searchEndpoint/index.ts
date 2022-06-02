@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import * as data from './contactlist.sample.json';
+import * as jsonData from './contactlist.sample.json';
 
 const httpTrigger: AzureFunction = async function ( context: Context, req: HttpRequest ): Promise<void> {
 
@@ -19,8 +19,12 @@ const httpTrigger: AzureFunction = async function ( context: Context, req: HttpR
 };
 
 function filterSearch( searchTerm: string, maxResults: number ) {
+
+    let data: any = jsonData
+
+    const filteredContacts = data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) || item.userPrincipalName.toLowerCase().includes( searchTerm.toLowerCase() ) )
     // @ts-ignore
-    return data.filter( item => item.displayName.toLowerCase().includes( searchTerm.toLowerCase() ) || item.userPrincipalName.toLowerCase().includes( searchTerm.toLowerCase() ) );
+    return filteredContacts.slice( 0, maxResults );
 };
 
 
